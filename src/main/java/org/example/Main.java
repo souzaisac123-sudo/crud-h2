@@ -7,18 +7,16 @@ public class Main {
         ProdutoDAO dao = new ProdutoDAO();
         dao.criarTabela();
 
-        System.out.println("--- Todos os produtos ---");
-        List<Produto> lista = dao.listar();
-        for (Produto p : lista) {
+        System.out.println("--- Antes ---");
+        for (Produto p : dao.listar()) {
             System.out.println(p);
         }
 
-        System.out.println("--- Buscando o produto de id 1 ---");
-        Produto encontrado = dao.buscarPorId(1);
-        if (encontrado != null) {
-            System.out.println(encontrado);
-        } else {
-            System.out.println("Produto não encontrado.");
+        dao.atualizar(new Produto(1, "Teclado Mecânico", 270.00));
+
+        System.out.println("--- Depois ---");
+        for (Produto p : dao.listar()) {
+            System.out.println(p);
         }
     }
 }

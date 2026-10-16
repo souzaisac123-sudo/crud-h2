@@ -86,4 +86,26 @@ public class ProdutoDAO {
         }
         return null;
     }
+    // UPDATE
+    public void atualizar(Produto produto) {
+        String sql = "UPDATE produto SET nome = ?, preco = ? WHERE id = ?";
+
+        try (Connection conn = Conexao.getConnection();
+        PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, produto.getNome());
+            ps.setDouble(2, produto.getPreco());
+            ps.setInt(3, produto.getId());
+
+            int linhas = ps.executeUpdate();
+            if (linhas > 0) {
+                System.out.println("Produto atualizado com sucesso!");
+            } else {
+                System.out.println("Produto não encontrado com esse ID.");
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao atualizar: " + e.getMessage());
+        }
+    }
 }
