@@ -108,4 +108,24 @@ public class ProdutoDAO {
             System.out.println("Erro ao atualizar: " + e.getMessage());
         }
     }
+
+    public void deletar(int id) {
+        String sql = "DELETE FROM produto WHERE id = ?";
+
+        try (Connection conn =Conexao.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+
+            int linhas = ps.executeUpdate();
+            if (linhas > 0) {
+                System.out.println("Produto removido com sucesso!");
+            } else {
+                System.out.println("Nenhum produto encontrado com esse ID.");
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao deletar" + e.getMessage());
+        }
+    }
 }

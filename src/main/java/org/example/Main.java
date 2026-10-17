@@ -12,7 +12,7 @@ public class Main {
             System.out.println(p);
         }
 
-        dao.atualizar(new Produto(1, "Teclado Mecânico", 270.00));
+        dao.deletar(1);
 
         System.out.println("--- Depois ---");
         for (Produto p : dao.listar()) {
