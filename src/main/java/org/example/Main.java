@@ -53,12 +53,30 @@ public class Main {
                 case 4 -> {
                     System.out.print("ID do produto: ");
                     int id = Integer.parseInt(sc.nextLine());
-                    System.out.print("Novo nome: ");
-                    String nome = sc.nextLine();
-                    System.out.print("Novo preço: ");
-                    double preco = Double.parseDouble(sc.nextLine().replace(",", "."));
-                    dao.atualizar(new Produto(id, nome, preco));
+
+                    Produto atual = dao.buscarPorId(id);
+
+                    if (atual == null) {
+                        System.out.println("Produto não encontrado.");
+                    } else {
+                        System.out.println("Produto encontrado:");
+                        System.out.println("Nome atual: " + atual.getNome());
+                        System.out.println("Preço atual: R$ " + atual.getPreco());
+                        System.out.print("Este é o produto correto? (s/n): ");
+                        String resposta = sc.nextLine();
+
+                        if (resposta.equalsIgnoreCase("s")) {
+                            System.out.print("Novo nome: ");
+                            String nome = sc.nextLine();
+                            System.out.print("Novo preço: ");
+                            double preco = Double.parseDouble(sc.nextLine().replace(",", "."));
+                            dao.atualizar(new Produto(id, nome, preco));
+                        } else {
+                            System.out.println("Atualização cancelada.");
+                        }
+                    }
                 }
+
                 case 5 -> {
                     System.out.print("ID do produto: ");
                     int id = Integer.parseInt(sc.nextLine());
